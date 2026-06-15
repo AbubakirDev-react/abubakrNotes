@@ -1,0 +1,269 @@
+notes-app/
+├── public/
+│   ├── index.html
+│   ├── favicon.ico
+│   ├── favicon-16x16.png
+│   ├── favicon-32x32.png
+│   ├── apple-touch-icon.png
+│   ├── robots.txt
+│   └── manifest.json
+│
+├── src/
+│   ├── app/                          # Точка входа и конфиги приложения
+│   │   ├── App.jsx
+│   │   ├── Router.jsx
+│   │   ├── Providers.jsx             # Все провайдеры в одном месте
+│   │   └── main.jsx
+│   │
+│   ├── pages/                        # Страницы (роуты)
+│   │   ├── HomePage/
+│   │   │   ├── HomePage.jsx
+│   │   │   └── index.js
+│   │   ├── NoteDetailPage/
+│   │   │   ├── NoteDetailPage.jsx
+│   │   │   └── index.js
+│   │   ├── TrashPage/
+│   │   │   ├── TrashPage.jsx
+│   │   │   └── index.js
+│   │   ├── ArchivePage/
+│   │   │   ├── ArchivePage.jsx
+│   │   │   └── index.js
+│   │   └── NotFoundPage/
+│   │       ├── NotFoundPage.jsx
+│   │       └── index.js
+│   │
+│   ├── features/                     # Фичи (Feature-Sliced Design)
+│   │   ├── notes/
+│   │   │   ├── components/
+│   │   │   │   ├── NoteCard/
+│   │   │   │   │   ├── NoteCard.jsx
+│   │   │   │   │   ├── NoteCard.module.css
+│   │   │   │   │   └── index.js
+│   │   │   │   ├── NoteEditor/
+│   │   │   │   │   ├── NoteEditor.jsx
+│   │   │   │   │   ├── NoteEditor.module.css
+│   │   │   │   │   ├── NoteEditorToolbar.jsx
+│   │   │   │   │   └── index.js
+│   │   │   │   ├── NoteList/
+│   │   │   │   │   ├── NoteList.jsx
+│   │   │   │   │   ├── NoteList.module.css
+│   │   │   │   │   ├── NoteListEmpty.jsx
+│   │   │   │   │   └── index.js
+│   │   │   │   ├── NotePreview/
+│   │   │   │   │   ├── NotePreview.jsx
+│   │   │   │   │   └── index.js
+│   │   │   │   └── NotePinButton/
+│   │   │   │       ├── NotePinButton.jsx
+│   │   │   │       └── index.js
+│   │   │   ├── hooks/
+│   │   │   │   ├── useCreateNote.js
+│   │   │   │   ├── useDeleteNote.js
+│   │   │   │   ├── useUpdateNote.js
+│   │   │   │   ├── usePinNote.js
+│   │   │   │   └── useNoteById.js
+│   │   │   ├── store/
+│   │   │   │   ├── notesSlice.js
+│   │   │   │   └── notesSelectors.js
+│   │   │   ├── types/
+│   │   │   │   └── note.types.js
+│   │   │   ├── utils/
+│   │   │   │   ├── sortNotes.js
+│   │   │   │   └── filterNotes.js
+│   │   │   └── index.js
+│   │   │
+│   │   ├── search/
+│   │   │   ├── components/
+│   │   │   │   ├── SearchBar/
+│   │   │   │   │   ├── SearchBar.jsx
+│   │   │   │   │   ├── SearchBar.module.css
+│   │   │   │   │   └── index.js
+│   │   │   │   └── SearchResults/
+│   │   │   │       ├── SearchResults.jsx
+│   │   │   │       └── index.js
+│   │   │   ├── hooks/
+│   │   │   │   ├── useSearch.js
+│   │   │   │   └── useSearchHistory.js
+│   │   │   └── index.js
+│   │   │
+│   │   ├── tags/
+│   │   │   ├── components/
+│   │   │   │   ├── TagBadge/
+│   │   │   │   │   ├── TagBadge.jsx
+│   │   │   │   │   ├── TagBadge.module.css
+│   │   │   │   │   └── index.js
+│   │   │   │   ├── TagList/
+│   │   │   │   │   ├── TagList.jsx
+│   │   │   │   │   └── index.js
+│   │   │   │   └── TagSelector/
+│   │   │   │       ├── TagSelector.jsx
+│   │   │   │       └── index.js
+│   │   │   ├── hooks/
+│   │   │   │   ├── useTags.js
+│   │   │   │   └── useTagFilter.js
+│   │   │   ├── store/
+│   │   │   │   └── tagsSlice.js
+│   │   │   └── index.js
+│   │   │
+│   │   ├── trash/
+│   │   │   ├── components/
+│   │   │   │   ├── TrashList/
+│   │   │   │   │   ├── TrashList.jsx
+│   │   │   │   │   └── index.js
+│   │   │   │   └── TrashActions/
+│   │   │   │       ├── TrashActions.jsx
+│   │   │   │       └── index.js
+│   │   │   ├── hooks/
+│   │   │   │   ├── useTrash.js
+│   │   │   │   └── useRestoreNote.js
+│   │   │   └── index.js
+│   │   │
+│   │   ├── archive/
+│   │   │   ├── components/
+│   │   │   │   └── ArchiveList/
+│   │   │   │       ├── ArchiveList.jsx
+│   │   │   │       └── index.js
+│   │   │   ├── hooks/
+│   │   │   │   └── useArchive.js
+│   │   │   └── index.js
+│   │   │
+│   │   └── theme/
+│   │       ├── components/
+│   │       │   └── ThemeToggle/
+│   │       │       ├── ThemeToggle.jsx
+│   │       │       └── index.js
+│   │       ├── hooks/
+│   │       │   └── useTheme.js
+│   │       ├── store/
+│   │       │   └── themeSlice.js
+│   │       └── index.js
+│   │
+│   ├── components/                   # Общие переиспользуемые компоненты
+│   │   ├── layout/
+│   │   │   ├── Sidebar/
+│   │   │   │   ├── Sidebar.jsx
+│   │   │   │   ├── Sidebar.module.css
+│   │   │   │   ├── SidebarNav.jsx
+│   │   │   │   ├── SidebarHeader.jsx
+│   │   │   │   └── index.js
+│   │   │   ├── MainLayout/
+│   │   │   │   ├── MainLayout.jsx
+│   │   │   │   ├── MainLayout.module.css
+│   │   │   │   └── index.js
+│   │   │   └── Header/
+│   │   │       ├── Header.jsx
+│   │   │       ├── Header.module.css
+│   │   │       └── index.js
+│   │   │
+│   │   └── ui/                       # Атомарные UI компоненты
+│   │       ├── Button/
+│   │       │   ├── Button.jsx
+│   │       │   ├── Button.module.css
+│   │       │   └── index.js
+│   │       ├── Input/
+│   │       │   ├── Input.jsx
+│   │       │   ├── Input.module.css
+│   │       │   └── index.js
+│   │       ├── Textarea/
+│   │       │   ├── Textarea.jsx
+│   │       │   └── index.js
+│   │       ├── Modal/
+│   │       │   ├── Modal.jsx
+│   │       │   ├── Modal.module.css
+│   │       │   ├── ModalHeader.jsx
+│   │       │   ├── ModalBody.jsx
+│   │       │   ├── ModalFooter.jsx
+│   │       │   └── index.js
+│   │       ├── Tooltip/
+│   │       │   ├── Tooltip.jsx
+│   │       │   └── index.js
+│   │       ├── Dropdown/
+│   │       │   ├── Dropdown.jsx
+│   │       │   ├── Dropdown.module.css
+│   │       │   ├── DropdownItem.jsx
+│   │       │   └── index.js
+│   │       ├── Badge/
+│   │       │   ├── Badge.jsx
+│   │       │   └── index.js
+│   │       ├── Spinner/
+│   │       │   ├── Spinner.jsx
+│   │       │   └── index.js
+│   │       ├── Toast/
+│   │       │   ├── Toast.jsx
+│   │       │   ├── Toast.module.css
+│   │       │   ├── ToastContainer.jsx
+│   │       │   └── index.js
+│   │       ├── ContextMenu/
+│   │       │   ├── ContextMenu.jsx
+│   │       │   ├── ContextMenu.module.css
+│   │       │   └── index.js
+│   │       ├── EmptyState/
+│   │       │   ├── EmptyState.jsx
+│   │       │   └── index.js
+│   │       ├── ConfirmDialog/
+│   │       │   ├── ConfirmDialog.jsx
+│   │       │   └── index.js
+│   │       └── IconButton/
+│   │           ├── IconButton.jsx
+│   │           └── index.js
+│   │
+│   ├── store/                        # Глобальный стейт (Zustand или Redux)
+│   │   ├── index.js                  # Конфиг стора
+│   │   └── rootReducer.js
+│   │
+│   ├── hooks/                        # Глобальные хуки
+│   │   ├── useDebounce.js
+│   │   ├── useLocalStorage.js
+│   │   ├── useKeyboardShortcut.js
+│   │   ├── useClickOutside.js
+│   │   ├── useMediaQuery.js
+│   │   └── useAutoSave.js
+│   │
+│   ├── context/                      # React контексты
+│   │   ├── ThemeContext.jsx
+│   │   ├── NotesContext.jsx
+│   │   └── ToastContext.jsx
+│   │
+│   ├── services/                     # Работа с данными
+│   │   ├── storage/
+│   │   │   ├── localStorageService.js
+│   │   │   └── indexedDBService.js   # Для больших данных
+│   │   └── export/
+│   │       ├── exportToMarkdown.js
+│   │       └── exportToTxt.js
+│   │
+│   ├── utils/                        # Чистые утилиты
+│   │   ├── formatDate.js
+│   │   ├── generateId.js
+│   │   ├── debounce.js
+│   │   ├── truncateText.js
+│   │   ├── highlightText.js          # Подсветка поиска
+│   │   └── markdownParser.js
+│   │
+│   ├── constants/                    # Константы
+│   │   ├── routes.js
+│   │   ├── keybindings.js
+│   │   ├── noteDefaults.js
+│   │   └── storageKeys.js
+│   │
+│   ├── assets/                       # Статика
+│   │   ├── icons/
+│   │   └── images/
+│   │
+│   └── styles/                       # Глобальные стили
+│       ├── globals.css
+│       ├── reset.css
+│       ├── variables.css             # CSS токены (цвета, типографика)
+│       ├── animations.css
+│       └── themes/
+│           ├── light.css
+│           └── dark.css
+│
+├── .env
+├── .env.example
+├── .gitignore
+├── .eslintrc.js
+├── .prettierrc
+├── index.html
+├── package.json
+├── vite.config.js
+└── README.md
