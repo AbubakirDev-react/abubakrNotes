@@ -24,4 +24,11 @@ const sidebarHeaderData =  [
         }
     ]
 
+export const UserProfile = {
+    id: 1,
+    name: 'Abubakr',
+    email: 'abubakr@example.com',
+    avatar: 'https://avatars.githubusercontent.com/u/12345678?v=4'
+}
+
 export default sidebarHeaderData
