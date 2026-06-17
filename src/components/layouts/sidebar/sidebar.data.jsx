@@ -6,6 +6,7 @@ const sidebarHeaderData =  [
             title: 'All Notes',
             icon: <NotebookTextIcon color="indigo" />,
             href: '/all-notes',
+            color: 'text-indigo-500',
             notes: 24
         },
         {
@@ -13,6 +14,7 @@ const sidebarHeaderData =  [
             title: 'Trash',
             icon: <TrashIcon color="red" />,
             href: '/trash',
+            color: 'text-red-600',
             notes: 5
         },
         {
@@ -20,6 +22,7 @@ const sidebarHeaderData =  [
             title: 'Favourites',
             icon: <StarIcon color="orange" />,
             href: '/favourites',
+            color: 'text-orange-500',
             notes: 3
         }
     ]

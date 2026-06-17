@@ -1,15 +1,20 @@
 import React from 'react'
-import Sidebar from './components/layouts/sidebar/Sidebar'
-import Header from './components/layouts/header/Header'
+import Desktop from './components/ui/Desktop'
+import Tablet from './components/ui/Tablet'
+import Mobile from './components/ui/Mobile'
 
 export default function App() {
   return (
-    <div className='App flex h-screen'>
-      <Sidebar />
-      <div className="main flex flex-col w-full">
-        <Header />
-
+    <>
+      <div className="desktop lg:block md:hidden hidden">
+        <Desktop />
       </div>
-    </div>
+      <div className="tablet hidden lg:hidden md:block">
+        <Tablet />
+      </div>
+      <div className="mobile sm:block md:hidden">
+        <Mobile />
+      </div>
+    </>
   )
 }
