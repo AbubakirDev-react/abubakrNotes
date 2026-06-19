@@ -1,20 +1,20 @@
-import React from 'react'
-import Desktop from './components/ui/Desktop'
-import Tablet from './components/ui/Tablet'
-import Mobile from './components/ui/Mobile'
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from './assets/vite.svg'
+import heroImg from './assets/hero.png'
+import './App.css'
+import Navbar from './components/Navbar'
+import NotesList from './components/Notes/NotesList'
 
-export default function App() {
+function App() {
+  const [count, setCount] = useState(0)
+
   return (
     <>
-      <div className="desktop lg:block md:hidden hidden">
-        <Desktop />
-      </div>
-      <div className="tablet hidden lg:hidden md:block">
-        <Tablet />
-      </div>
-      <div className="mobile sm:block md:hidden">
-        <Mobile />
-      </div>
+      <Navbar />
+      <NotesList/>
     </>
   )
 }
+
+export default App
