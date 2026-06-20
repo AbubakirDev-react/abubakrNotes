@@ -1,10 +1,17 @@
-import { FolderPlus, LucideNotepadText, PlusIcon } from 'lucide-react'
+import { FolderPlus, LucideNotepadText, NotebookTextIcon, PlusIcon } from 'lucide-react'
 import React, { useState } from 'react'
 import { folders } from './folders'
 import { Link } from 'react-router-dom';
+import { useNote } from '../../context/NoteContext';
+import { useFolders } from '../../context/FolderContext';
 
 export default function Sidebar() {
-    const [activeFolder,setActiveFolder] = useState('All Notes');
+    const {notes} = useNote();
+    function notesLength(title){
+        const filteredNotes = notes.filter(note=>note.folder===title)
+        return filteredNotes.length
+    }
+    const {setActiveFolder} = useFolders();
   return (
     <nav className='w-1/5 h-screen sticky border border-mist-500 flex flex-col'>
       {/* header */}
@@ -19,14 +26,20 @@ export default function Sidebar() {
         <div className='flex flex-col flex-1 overflow-y-auto justify-start p-2 px-3 gap-2 gap-y-3'>
             <h3>Folders</h3>
             <ul className='gap-2 flex flex-col'>
+                <li className='flex'>
+                    <Link to="/" onClick={()=>setActiveFolder('All Notes')} className='flex rounded items-center gap-2 w-full h-full duration-300 hover:bg-mist-700 focus:bg-mist-600  px-3 py-1.5 '>
+                        <NotebookTextIcon size={20} />
+                        <span>All notes</span><span className='ml-auto text-sm'>{notes.length}</span>
+                    </Link>
+                </li>
                 {folders.map((folder,index)=>(
                     <li key={index} className='flex'>
-                        <a href="#" className='flex rounded items-center gap-2 w-full h-full duration-300 hover:bg-mist-700 focus:bg-mist-600  px-3 py-1.5 '>
+                        <Link to="/" onClick={()=>setActiveFolder(folder.title)} className='flex rounded items-center gap-2 w-full h-full duration-300 hover:bg-mist-700 focus:bg-mist-600  px-3 py-1.5 '>
                             {folder.icon}
                             <span>{folder.title}</span>
                             
-                            <span className='ml-auto text-sm'>{folder.notes}</span>
-                        </a>
+                            <span className='ml-auto text-sm'>{notesLength(folder.title)}</span>
+                        </Link>
                     </li>
                 ))}
                 <li className='border rounded flex border-mist-500'>

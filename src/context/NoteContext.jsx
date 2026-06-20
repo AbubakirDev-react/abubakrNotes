@@ -18,6 +18,7 @@ export default function NoteProvider({children}){
     function createNote(title,folder,data){
         setNotes([...notes,{title:title,folder:folder,data:data}])
     }
+    
     return(
         <NoteContext.Provider value={{ notes,createNote }}>{children}</NoteContext.Provider>
     )

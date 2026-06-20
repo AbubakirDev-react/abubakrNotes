@@ -23,10 +23,13 @@ export default function FolderProvider({children}){
         setFolders(updated)
         localStorage.setItem(STORAGE_KEY,JSON.stringify(updated))
     }
+    const [activeFolder,setActiveFolder] = useState('All Notes');
     return (
     <FoldersContext.Provider value={{
         folders,
-        saveFolders
+        saveFolders,
+        activeFolder,
+        setActiveFolder
     }}>
         {children}
     </FoldersContext.Provider>)
