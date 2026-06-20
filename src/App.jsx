@@ -5,15 +5,15 @@ import heroImg from './assets/hero.png'
 import './App.css'
 import Navbar from './components/Navbar'
 import NotesList from './components/Notes/NotesList'
+import NoteProvider from './context/NoteContext'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
+    <NoteProvider>
       <Navbar />
       <NotesList/>
-    </>
+    </NoteProvider>
   )
 }
 
