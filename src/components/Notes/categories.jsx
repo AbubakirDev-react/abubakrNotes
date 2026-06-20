@@ -1,7 +1,7 @@
 export const Categories = [
     {
         id:1,
-        title:'Study'
+        title:'Study',
     },
     {
         id:2,

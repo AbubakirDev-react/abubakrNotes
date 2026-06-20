@@ -7,10 +7,10 @@ import { useNote } from '../../context/NoteContext'
 export default function NotesList() {
   const {notes} = useNote();
   return (
-    <div className='flex items-center flex-col justify-center gap-4 p-3'>
+    <div className='flex flex-col gap-4 p-3'>
       <h1>Notes</h1>
 
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 h-full">
         <AddNote />
         {notes.map((note,index)=>(
         <NoteCard note={note}  key={index}/>

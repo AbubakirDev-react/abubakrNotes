@@ -1,0 +1,171 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); }
+.app { display: flex; height: 560px; border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); overflow: hidden; background: var(--color-background-primary); }
+.sidebar { width: 220px; border-right: 0.5px solid var(--color-border-tertiary); background: var(--color-background-secondary); display: flex; flex-direction: column; flex-shrink: 0; }
+.sidebar-header { padding: 16px 14px 12px; border-bottom: 0.5px solid var(--color-border-tertiary); }
+.logo { font-size: 15px; font-weight: 500; color: var(--color-text-primary); display: flex; align-items: center; gap: 8px; }
+.logo i { font-size: 18px; color: #534AB7; }
+.search-box { margin-top: 10px; display: flex; align-items: center; gap: 6px; background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 6px 10px; }
+.search-box i { font-size: 14px; color: var(--color-text-tertiary); }
+.search-box span { font-size: 13px; color: var(--color-text-tertiary); }
+.folders { padding: 10px 8px; flex: 1; overflow-y: auto; }
+.folder-label { font-size: 11px; font-weight: 500; color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: 0.06em; padding: 4px 6px; margin-bottom: 4px; }
+.folder-item { display: flex; align-items: center; gap: 8px; padding: 7px 8px; border-radius: var(--border-radius-md); cursor: pointer; font-size: 13px; color: var(--color-text-secondary); }
+.folder-item:hover { background: var(--color-background-primary); }
+.folder-item.active { background: #EEEDFE; color: #534AB7; font-weight: 500; }
+.folder-item i { font-size: 15px; }
+.folder-item .count { margin-left: auto; font-size: 11px; background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: 10px; padding: 1px 7px; color: var(--color-text-tertiary); }
+.folder-item.active .count { background: #EEEDFE; border-color: #AFA9EC; color: #534AB7; }
+.new-note-btn { margin: 10px; display: flex; align-items: center; justify-content: center; gap: 6px; background: #534AB7; color: white; border: none; border-radius: var(--border-radius-md); padding: 9px; font-size: 13px; font-weight: 500; cursor: pointer; }
+.new-note-btn i { font-size: 15px; }
+.notes-list { width: 240px; border-right: 0.5px solid var(--color-border-tertiary); display: flex; flex-direction: column; flex-shrink: 0; }
+.notes-list-header { padding: 14px 14px 10px; border-bottom: 0.5px solid var(--color-border-tertiary); display: flex; align-items: center; justify-content: space-between; }
+.notes-list-header span { font-size: 14px; font-weight: 500; color: var(--color-text-primary); }
+.notes-list-header i { font-size: 16px; color: var(--color-text-secondary); cursor: pointer; }
+.note-card { padding: 12px 14px; border-bottom: 0.5px solid var(--color-border-tertiary); cursor: pointer; transition: background 0.1s; }
+.note-card:hover { background: var(--color-background-secondary); }
+.note-card.active { background: #EEEDFE; border-left: 2px solid #534AB7; }
+.note-card-title { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.note-card.active .note-card-title { color: #3C3489; }
+.note-card-preview { font-size: 12px; color: var(--color-text-tertiary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 6px; }
+.note-card-meta { display: flex; align-items: center; gap: 6px; }
+.note-card-date { font-size: 11px; color: var(--color-text-tertiary); }
+.tag { font-size: 10px; padding: 2px 7px; border-radius: 10px; font-weight: 500; }
+.tag.purple { background: #EEEDFE; color: #534AB7; }
+.tag.teal { background: #E1F5EE; color: #0F6E56; }
+.tag.amber { background: #FAEEDA; color: #854F0B; }
+.editor { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+.editor-toolbar { padding: 10px 16px; border-bottom: 0.5px solid var(--color-border-tertiary); display: flex; align-items: center; gap: 4px; }
+.tb-btn { padding: 5px 8px; border: none; background: transparent; border-radius: var(--border-radius-md); font-size: 13px; color: var(--color-text-secondary); cursor: pointer; display: flex; align-items: center; }
+.tb-btn:hover { background: var(--color-background-secondary); }
+.tb-btn i { font-size: 16px; }
+.tb-divider { width: 0.5px; height: 18px; background: var(--color-border-tertiary); margin: 0 4px; }
+.tb-spacer { flex: 1; }
+.editor-body { flex: 1; padding: 28px 32px; overflow-y: auto; }
+.editor-title-input { font-size: 22px; font-weight: 500; color: var(--color-text-primary); border: none; outline: none; background: transparent; width: 100%; margin-bottom: 6px; }
+.editor-meta-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+.editor-meta-row span { font-size: 12px; color: var(--color-text-tertiary); }
+.editor-meta-row .tag { cursor: pointer; }
+.editor-content { font-size: 14px; color: var(--color-text-secondary); line-height: 1.8; }
+.editor-content .h2 { font-size: 16px; font-weight: 500; color: var(--color-text-primary); margin: 16px 0 6px; }
+.editor-content p { margin-bottom: 10px; }
+.editor-content .checklist { display: flex; flex-direction: column; gap: 6px; margin: 10px 0; }
+.editor-content .check-item { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.check-box { width: 16px; height: 16px; border-radius: 4px; border: 0.5px solid var(--color-border-tertiary); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.check-box.done { background: #534AB7; border-color: #534AB7; }
+.check-box.done i { font-size: 11px; color: white; }
+.check-item.done-text { color: var(--color-text-tertiary); text-decoration: line-through; }
+.cursor-line { display: inline-block; width: 1.5px; height: 14px; background: #534AB7; margin-left: 1px; animation: blink 1s step-end infinite; vertical-align: -2px; }
+@keyframes blink { 50% { opacity: 0; } }
+</style>
+
+<h2 class="sr-only">Note app UI concept — sidebar, notes list, and editor</h2>
+
+<div class="app">
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo"><i class="ti ti-notebook" aria-hidden="true"></i> Notely</div>
+      <div class="search-box"><i class="ti ti-search" aria-hidden="true"></i><span>Qidirish...</span></div>
+    </div>
+    <div class="folders">
+      <div class="folder-label">Papkalar</div>
+      <div class="folder-item active"><i class="ti ti-notes"></i> Barcha notlar <span class="count">14</span></div>
+      <div class="folder-item"><i class="ti ti-star"></i> Saralangan <span class="count">3</span></div>
+      <div class="folder-item"><i class="ti ti-clock"></i> Yaqinda <span class="count">5</span></div>
+      <div class="folder-item"><i class="ti ti-folder"></i> Ish <span class="count">6</span></div>
+      <div class="folder-item"><i class="ti ti-folder"></i> Shaxsiy <span class="count">4</span></div>
+      <div class="folder-item"><i class="ti ti-tag"></i> Loyiha <span class="count">2</span></div>
+      <div class="folder-item"><i class="ti ti-trash"></i> Arxiv <span class="count">1</span></div>
+    </div>
+    <button class="new-note-btn"><i class="ti ti-plus" aria-hidden="true"></i> Yangi not</button>
+  </div>
+
+  <div class="notes-list">
+    <div class="notes-list-header">
+      <span>Notlar</span>
+      <i class="ti ti-dots-vertical" aria-hidden="true"></i>
+    </div>
+
+    <div class="note-card active">
+      <div class="note-card-title">React loyiha rejasi</div>
+      <div class="note-card-preview">Komponentlar tuzilmasi va routing...</div>
+      <div class="note-card-meta"><span class="note-card-date">Bugun</span><span class="tag purple">Loyiha</span></div>
+    </div>
+
+    <div class="note-card">
+      <div class="note-card-title">Haftalik maqsadlar</div>
+      <div class="note-card-preview">1. Kurs yakunlash 2. Portfolio...</div>
+      <div class="note-card-meta"><span class="note-card-date">Kecha</span><span class="tag teal">Shaxsiy</span></div>
+    </div>
+
+    <div class="note-card">
+      <div class="note-card-title">Kitob izohlari — Clean Code</div>
+      <div class="note-card-preview">Funksiya nomini aniq yozing...</div>
+      <div class="note-card-meta"><span class="note-card-date">3 kun oldin</span><span class="tag amber">Ish</span></div>
+    </div>
+
+    <div class="note-card">
+      <div class="note-card-title">API endpoint dizayn</div>
+      <div class="note-card-preview">REST vs GraphQL taqqoslash...</div>
+      <div class="note-card-meta"><span class="note-card-date">1 haf. oldin</span><span class="tag purple">Loyiha</span></div>
+    </div>
+
+    <div class="note-card">
+      <div class="note-card-title">Ovqat retseptlari</div>
+      <div class="note-card-preview">Osh uchun kerakli mahsulotlar...</div>
+      <div class="note-card-meta"><span class="note-card-date">2 haf. oldin</span><span class="tag teal">Shaxsiy</span></div>
+    </div>
+  </div>
+
+  <div class="editor">
+    <div class="editor-toolbar">
+      <button class="tb-btn" title="Bold"><i class="ti ti-bold" aria-hidden="true"></i></button>
+      <button class="tb-btn" title="Italic"><i class="ti ti-italic" aria-hidden="true"></i></button>
+      <button class="tb-btn" title="Underline"><i class="ti ti-underline" aria-hidden="true"></i></button>
+      <div class="tb-divider"></div>
+      <button class="tb-btn" title="List"><i class="ti ti-list" aria-hidden="true"></i></button>
+      <button class="tb-btn" title="Checklist"><i class="ti ti-checkbox" aria-hidden="true"></i></button>
+      <button class="tb-btn" title="Code"><i class="ti ti-code" aria-hidden="true"></i></button>
+      <div class="tb-divider"></div>
+      <button class="tb-btn" title="Link"><i class="ti ti-link" aria-hidden="true"></i></button>
+      <button class="tb-btn" title="Image"><i class="ti ti-photo" aria-hidden="true"></i></button>
+      <div class="tb-spacer"></div>
+      <button class="tb-btn" title="Star"><i class="ti ti-star" aria-hidden="true"></i></button>
+      <button class="tb-btn" title="Share"><i class="ti ti-share" aria-hidden="true"></i></button>
+      <button class="tb-btn" title="More"><i class="ti ti-dots-vertical" aria-hidden="true"></i></button>
+    </div>
+    <div class="editor-body">
+      <input class="editor-title-input" value="React loyiha rejasi" readonly />
+      <div class="editor-meta-row">
+        <span><i class="ti ti-calendar" style="font-size:12px;vertical-align:-1px;"></i> 20 Iyun 2026</span>
+        <span class="tag purple">Loyiha</span>
+        <span class="tag teal">React</span>
+      </div>
+      <div class="editor-content">
+        <div class="h2">Komponentlar tuzilmasi</div>
+        <p>Asosiy sahifalar va ular orasidagi routing tizimini rejalashtirish. React Router v6 ishlatamiz.</p>
+        <div class="h2">Bugungi vazifalar</div>
+        <div class="checklist">
+          <div class="check-item">
+            <div class="check-box done"><i class="ti ti-check"></i></div>
+            <span class="done-text">Sidebar komponentini yaratish</span>
+          </div>
+          <div class="check-item">
+            <div class="check-box done"><i class="ti ti-check"></i></div>
+            <span class="done-text">Notes list dizayni</span>
+          </div>
+          <div class="check-item">
+            <div class="check-box"></div>
+            <span>Editor qismini ulash</span>
+          </div>
+          <div class="check-item">
+            <div class="check-box"></div>
+            <span>LocalStorage bilan saqlash<span class="cursor-line"></span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

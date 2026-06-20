@@ -15,8 +15,8 @@ export default function NoteProvider({children}){
     useEffect(()=>{
         localStorage.setItem('notes',JSON.stringify(notes))
     },[notes])
-    function createNote(title,category,data){
-        setNotes([...notes,{title:title,category:category,data:data}])
+    function createNote(title,folder,data){
+        setNotes([...notes,{title:title,folder:folder,data:data}])
     }
     return(
         <NoteContext.Provider value={{ notes,createNote }}>{children}</NoteContext.Provider>
