@@ -10,6 +10,7 @@ import { Routes,Route } from 'react-router-dom'
 import Home from './pages/Home'
 import AddNote from './pages/AddNote'
 import FolderProvider from './context/FolderContext'
+import EditNote from './pages/EditNote'
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
         <Routes>
           <Route index element={<Home />} />
             <Route path='addnote/' element={<AddNote />} />
+            <Route path='edit/:id' element={<EditNote />} />
         </Routes>
       </div>
     </NoteProvider>

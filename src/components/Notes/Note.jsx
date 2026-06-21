@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useNote } from '../../context/NoteContext'
 import { Link } from 'react-router-dom';
+import Dropdown from './header_dropdown';
 
 export default function Note() {
     const {activeNote,notes} = useNote();
@@ -16,10 +17,12 @@ export default function Note() {
       console.log(activeNote)
     },[activeNote])
   return (
-    <div className='w-full flex items-center justify-start flex-col h-screen p-3'>
-      <h1 className='text-3xl'>{activeNote.title}</h1>
-      <h3>{activeNote.folder}</h3>
-      <p className='w-full h-screen border rounded rounded-lg p-3 wrap-break-word whitespace-pre-wrap max-w-full'>{activeNote.data}</p>
+    <div className='w-full flex gap-3 items-start justify-center flex-col h-screen p-3'>
+      <div className="flex w-full gap-3 items-center justify-between">
+        <h1 className='text-3xl'>{activeNote.title}</h1>
+          <Dropdown note={activeNote}/>
+      </div>
+      <p className='w-full h-screen border rounded-lg p-3 wrap-break-word whitespace-pre-wrap max-w-full'>{activeNote.data}</p>
     </div>
   )
 }
