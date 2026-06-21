@@ -1,6 +1,5 @@
 import { FolderPlus, LucideNotepadText, NotebookTextIcon, PlusIcon } from 'lucide-react'
 import React, { useState } from 'react'
-import { folders } from './folders'
 import { Link } from 'react-router-dom';
 import { useNote } from '../../context/NoteContext';
 import { useFolders } from '../../context/FolderContext';
@@ -11,7 +10,7 @@ export default function Sidebar() {
         const filteredNotes = notes.filter(note=>note.folder===title)
         return filteredNotes.length
     }
-    const {setActiveFolder} = useFolders();
+    const {folders,setActiveFolder} = useFolders();
   return (
     <nav className='w-1/5 h-screen sticky border border-mist-500 flex flex-col'>
       {/* header */}
