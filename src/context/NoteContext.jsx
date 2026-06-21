@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { useFolders } from "./FolderContext";
 
 
 const NoteContext = createContext(null);
@@ -19,26 +20,9 @@ export default function NoteProvider({children}){
     function createNote(title,folder,data){
         setNotes([...notes,{id:crypto.randomUUID(),title:title,folder:folder,data:data}])
     }
+    const {activeFolder} = useFolders();
     const [activeNote,setActiveNote] = useState(notes[0])
-    const [loading,setLoading] = useState(true)
-    useEffect(()=>{
-        const fetchNotes = async () => {
-        try{
-            const response = await axios.get('https://jsonplaceholder.typicode.com/posts')
-            const data = response.data
-            setNotes([...notes,data])
-            setLoading(false)
-        } catch(error){
-            console.log('Error',error)
-            setLoading(false)
-        }
-    }
-    fetchNotes()
-    },[])
-
-    if(loading){
-        return <h1>Loading...</h1>
-    }
+    
 
     return(
         <NoteContext.Provider value={{ notes,createNote,activeNote,setActiveNote }}>{children}</NoteContext.Provider>

@@ -17,7 +17,7 @@ export default function NotesList() {
       <ul className='flex flex-col gap-3'>
         {filteredNotes.map((note)=>(
           <li key={note.id}>
-            <Link to='/' onClick={()=>setActiveNote(folders.find(f=>f.id===note.id))} className='flex flex-col rounded-lg border border-mist-700 hover:bg-mist-600 focus:bg-mist-600 px-3 py-1.5'>
+            <Link to='/' onClick={()=>setActiveNote(notes.find(f=>f.id===note.id))} className='flex flex-col rounded-lg border border-mist-700 hover:bg-mist-600 focus:bg-mist-600 px-3 py-1.5'>
               <span className='text-lg uppercase'>{note.title}</span>
               <span className='text-sm lowercase text-white/20'>{note.folder}</span>
             </Link>
